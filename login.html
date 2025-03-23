@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CropShield AI</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #004d00;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input {
+            background-color: #005500;
+            border: none;
+            color: white;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button {
+            background-color: white; 
+            font-weight: bold; 
+            margin: 10px auto; 
+            color: #005500;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+            width: fit-content; 
+            border-radius: 15px; 
+            padding: 10px 20px;
+        }
+        button:hover {
+            background-color: #00b300;
+        }
+        .social-buttons {
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            margin-top: 40px; 
+        }
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color:#005500;
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            margin: 10px 0;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 100%; 
+            max-width: 300px;
+            text-align: center;
+        }
+        .social-button:hover {
+            background-color:#00b300 ;
+        }
+        .social-button img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            object-fit: contain; 
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="password" name="password" placeholder="Password Required" required>
+        <button type="submit">Login</button>
+    </form>
+    <div class="social-buttons">
+        <button class="social-button">
+            <img src="Google-Symbol.png" alt="Google Logo">
+            Login with Google
+        </button>
+        <button class="social-button">
+            <img src="facebook_04B0032001662445.png" alt="Facebook Logo">
+            Login with Facebook
+        </button>
+        <button class="social-button">
+            <img src="OIP.jpeg" alt="Apple Logo">
+            Login with Apple
+        </button>
+    </div>
+</body>
+</html>
+

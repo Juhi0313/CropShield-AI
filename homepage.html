@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Weather Info</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #004d00;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 1rem;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            background-color: white;
+            color: #005500;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00b300;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose Your Location</h1>
+
+    <label for="stateSelect">Choose State:</label>
+    <select id="stateSelect">
+        <option value="" disabled selected>Select State</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Rajasthan">Rajasthan</option>
+    </select>
+
+    <label for="citySelect">Choose City:</label>
+    <select id="citySelect" disabled>
+        <option value="" disabled selected>Select City</option>
+    </select>
+
+    <button id="okayButton" disabled>Okay</button>
+
+    <script>
+        const stateCityMap = {
+            Gujarat: ["Ahmedabad", "Surat", "Vadodara", "Rajkot"],
+            Maharashtra: ["Mumbai", "Pune", "Nagpur", "Nashik"],
+            Rajasthan: ["Jaipur", "Udaipur", "Jodhpur", "Ajmer"]
+        };
+
+        const stateSelect = document.getElementById("stateSelect");
+        const citySelect = document.getElementById("citySelect");
+        const okayButton = document.getElementById("okayButton");
+
+        
+        stateSelect.addEventListener("change", function () {
+            const selectedState = stateSelect.value;
+
+            citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
+            stateCityMap[selectedState].forEach(city => {
+                const option = document.createElement("option");
+                option.value = city;
+                option.textContent = city;
+                citySelect.appendChild(option);
+            });
+
+            citySelect.disabled = false;
+        });
+
+        
+        citySelect.addEventListener("change", function () {
+            okayButton.disabled = false;
+        });
+
+        
+        okayButton.addEventListener("click", function () {
+            const selectedState = stateSelect.value;
+            const selectedCity = citySelect.value;
+
+            window.location.href = `/main.html?state=${selectedState}&city=${selectedCity}`;
+        });
+    </script>
+</body>
+</html>
+
+
