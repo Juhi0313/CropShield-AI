@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CropShield AI</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css"> <!-- Ensure this CSS file exists and has styles -->
 </head>
 <body>
     <!-- Logo Page -->
@@ -63,33 +63,72 @@
         </div>
     </div>
 
+    <!-- Home Page with Weather -->
+    <div id="homepage" class="page">
+        <div class="container">
+            <h2>Weather Details</h2>
+            <div class="weather-box">
+                <img id="weatherImage" alt="Weather">
+                <div class="weather-details" id="weatherDetails">
+                    Loading weather details...
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation Scripts -->
     <script>
-        function handleLogin(event) {
-            event.preventDefault(); 
-            window.location.href = "/homepage.html"; 
-        }
-
+        // Navigate between pages
         function navigateTo(pageId) {
-            
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
-
-            
             document.getElementById(pageId).classList.add('active');
+        }
+
+        // Handle Login
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent default form submission
+            window.location.href = "/homepage.html"; // Redirect to homepage after login
+        }
+
+        // Fetch Weather Data (example API call for OpenWeather)
+        async function fetchWeather(city) {
+            try {
+                const response = await fetch(`/get-weather?city=${city}`);
+                const weatherData = await response.json();
+
+                const weatherDetails = document.getElementById("weatherDetails");
+                const weatherImage = document.getElementById("weatherImage");
+
+                const weatherType = weatherData.description.toLowerCase();
+                if (weatherType.includes("cloud")) {
+                    weatherImage.src = "cloudy.png";
+                } else if (weatherType.includes("clear")) {
+                    weatherImage.src = "sunny.png";
+                } else if (weatherType.includes("rain")) {
+                    weatherImage.src = "rainy.png";
+                } else {
+                    weatherImage.src = "default.png"; // Default image if no match
+                }
+
+                weatherDetails.innerHTML = `
+                    <strong>${city}:</strong> ${weatherData.temperature}°C, ${weatherData.description}
+                `;
+            } catch (error) {
+                console.error("Error fetching weather data:", error.message);
+                document.getElementById("weatherDetails").textContent = "Error loading weather details.";
+            }
+        }
+
+        // Get city parameter from URL and fetch weather
+        const urlParams = new URLSearchParams(window.location.search);
+        const city = urlParams.get("city");
+        if (city) {
+            fetchWeather(city);
+        } else {
+            document.getElementById("weatherDetails").textContent = "City parameter is missing.";
         }
     </script>
 </body>
 </html>
-
-
-
-
-
-
-        
-
-        
-
-
